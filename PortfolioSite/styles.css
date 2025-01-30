@@ -1,0 +1,879 @@
+:root {
+    --primary-color: #2a2a2a;
+    --secondary-color: #00ff88;
+    --accent-color: #ff2266;
+    --text-color: #ffffff;
+    --background-color: #0a0a0a;
+    --transition-speed: 0.3s;
+    --neon-shadow: 0 0 10px rgba(0, 255, 136, 0.5),
+                   0 0 20px rgba(0, 255, 136, 0.3),
+                   0 0 30px rgba(0, 255, 136, 0.1);
+}
+
+[data-theme="light"] {
+    --primary-color: #ffffff;
+    --secondary-color: #00cc88;
+    --accent-color: #ff2266;
+    --text-color: #2a2a2a;
+    --background-color: #f0f0f0;
+    --neon-shadow: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    overflow-x: hidden;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.switch-label {
+    width: 60px;
+    height: 30px;
+    background-color: var(--primary-color);
+    border-radius: 15px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+
+.switch-label::after {
+    content: '';
+    width: 26px;
+    height: 26px;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform var(--transition-speed);
+}
+
+#theme-switch:checked + .switch-label::after {
+    transform: translateX(30px);
+}
+
+#theme-switch {
+    display: none;
+}
+
+.main-nav {
+    position: fixed;
+    width: 100%;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-shadow: var(--neon-shadow);
+    letter-spacing: 2px;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;
+}
+
+.main-nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 18px;
+    transition: color var(--transition-speed);
+}
+
+.main-nav a:hover {
+    color: var(--secondary-color);
+}
+
+.section {
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Добавляем декоративные элементы */
+.section::before {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: var(--secondary-color);
+    filter: blur(150px);
+    opacity: 0.1;
+    animation: float 10s infinite ease-in-out;
+}
+
+.section::after {
+    content: '';
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: var(--accent-color);
+    filter: blur(150px);
+    opacity: 0.1;
+    animation: float 8s infinite ease-in-out reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(100px, 50px) rotate(90deg); }
+    50% { transform: translate(50px, -50px) rotate(180deg); }
+    75% { transform: translate(-100px, 50px) rotate(270deg); }
+}
+
+/* Улучшаем стили для about секции */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.about-text {
+    position: relative;
+    padding: 20px;
+}
+
+.about-text::before {
+    content: '"';
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    font-size: 120px;
+    color: var(--secondary-color);
+    opacity: 0.1;
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.stat {
+    text-align: center;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    transition: transform 0.3s;
+}
+
+.stat:hover {
+    transform: translateY(-10px);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+    text-shadow: var(--neon-shadow);
+    display: block;
+}
+
+.stat-label {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-top: 10px;
+    display: block;
+}
+
+/* Улучшаем стили для skills секции */
+.skills-container {
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.tech-item {
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.tech-item:hover {
+    background: var(--secondary-color);
+    transform: translateY(-5px);
+}
+
+/* Улучшаем стили для projects секции */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.project-card:hover::before {
+    transform: translateX(100%);
+}
+
+.project-image {
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+}
+
+.project-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-link {
+    padding: 15px 30px;
+    background: var(--secondary-color);
+    color: var(--background-color);
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transform: translateY(20px);
+    transition: all 0.3s;
+}
+
+.project-card:hover .project-link {
+    transform: translateY(0);
+}
+
+.project-tags {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.project-tags span {
+    padding: 5px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Улучшаем стили для contact секции */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 800px;
+    width: 100%;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    transition: all 0.3s;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+}
+
+.contact-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.contact-item:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.telegram-icon {
+    width: 24px;
+    height: 24px;
+    color: #0088cc;
+}
+
+.telegram-item {
+    background: rgba(0, 136, 204, 0.1) !important;
+    border: 1px solid rgba(0, 136, 204, 0.2);
+}
+
+.telegram-item:hover {
+    background: rgba(0, 136, 204, 0.15) !important;
+    box-shadow: 0 5px 15px rgba(0, 136, 204, 0.2);
+}
+
+.contact-link:hover {
+    color: var(--secondary-color);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.social-link {
+    padding: 12px 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 30px;
+    text-decoration: none;
+    color: var(--text-color);
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.social-link:hover {
+    background: var(--secondary-color);
+    color: var(--background-color);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.1);
+}
+
+.contact-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.contact-form button {
+    padding: 15px 30px;
+    background: transparent;
+    border: 2px solid var(--secondary-color);
+    border-radius: 30px;
+    color: var(--secondary-color);
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-form button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: var(--secondary-color);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+}
+
+.contact-form button:hover {
+    color: var(--background-color);
+}
+
+.contact-form button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Добавляем стили для подписей полей */
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 15px;
+    padding-top: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-color);
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s;
+    pointer-events: none;
+}
+
+.input-group input:focus ~ label,
+.input-group textarea:focus ~ label,
+.input-group input:not(:placeholder-shown) ~ label,
+.input-group textarea:not(:placeholder-shown) ~ label {
+    top: 5px;
+    font-size: 12px;
+    color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .glitch-text {
+        font-size: 2.5rem;
+    }
+    
+    .main-nav ul {
+        display: none;
+    }
+}
+
+.background-decoration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.decoration-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    filter: blur(100px);
+    opacity: 0.1;
+    animation: float 20s infinite ease-in-out;
+}
+
+.decoration-circle:nth-child(1) {
+    width: 400px;
+    height: 400px;
+    top: -200px;
+    left: -200px;
+    animation-delay: 0s;
+}
+
+.decoration-circle:nth-child(2) {
+    width: 300px;
+    height: 300px;
+    top: 50%;
+    right: -150px;
+    animation-delay: -5s;
+    background: var(--accent-color);
+}
+
+.decoration-circle:nth-child(3) {
+    width: 250px;
+    height: 250px;
+    bottom: -125px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: -10s;
+    background: linear-gradient(var(--secondary-color), var(--accent-color));
+}
+
+.section-decoration {
+    position: absolute;
+    background: var(--secondary-color);
+    filter: blur(50px);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.section-decoration.left {
+    width: 200px;
+    height: 100%;
+    left: -100px;
+    top: 0;
+}
+
+.section-decoration.right {
+    width: 200px;
+    height: 100%;
+    right: -100px;
+    top: 0;
+}
+
+.section-decoration.top {
+    width: 100%;
+    height: 200px;
+    top: -100px;
+    left: 0;
+}
+
+.title-container {
+    position: relative;
+    display: inline-block;
+}
+
+.title-decoration {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--secondary-color);
+    transform-origin: left;
+    animation: lineGrow 1s ease-out forwards;
+}
+
+@keyframes lineGrow {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+.text-decoration {
+    position: absolute;
+    top: 0;
+    right: -20px;
+    width: 2px;
+    height: 100%;
+    background: var(--secondary-color);
+    transform-origin: top;
+    animation: lineGrowVertical 1s ease-out forwards;
+}
+
+@keyframes lineGrowVertical {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.skill-icon {
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: transform 0.3s;
+}
+
+.skill:hover .skill-icon {
+    transform: scale(1.2) rotate(360deg);
+}
+
+/* Добавляем анимацию для прогресс-баров */
+.skill-progress {
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-progress::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    100% { transform: translateX(100%); }
+}
+
+/* Улучшаем стили для проектов */
+.project-card {
+    position: relative;
+}
+
+.project-card::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+    z-index: -1;
+    border-radius: 21px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.project-card:hover::after {
+    opacity: 1;
+}
+
+/* Добавляем стили для скролл-индикатора */
+.scroll-indicator {
+    position: relative;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+.scroll-indicator:hover {
+    opacity: 1;
+}
+
+.mouse {
+    width: 30px;
+    height: 50px;
+    border: 2px solid var(--text-color);
+    border-radius: 15px;
+    position: relative;
+}
+
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: var(--text-color);
+    border-radius: 2px;
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scroll 1.5s infinite;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid var(--text-color);
+    border-bottom: 2px solid var(--text-color);
+    transform: rotate(45deg);
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes scroll {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 20px); opacity: 0; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: rotate(45deg) translate(0, 0); }
+    50% { transform: rotate(45deg) translate(5px, 5px); }
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-top: 30px;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 10px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    opacity: 0.9;
+}
+
+.subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--secondary-color);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s;
+    animation: subtitleLine 1s ease-out 0.5s forwards;
+}
+
+@keyframes subtitleLine {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+}
+
+.telegram-item {
+    background: rgba(0, 136, 204, 0.1) !important;
+    border: 1px solid rgba(0, 136, 204, 0.2);
+}
+
+.telegram-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.telegram-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.telegram-icon {
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+}
+
+.telegram-item:hover {
+    background: rgba(0, 136, 204, 0.2) !important;
+}
+
+.telegram-link:hover .telegram-avatar {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+.contact-item.telegram-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 136, 204, 0.2);
+} 
